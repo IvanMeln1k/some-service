@@ -1,7 +1,6 @@
 # some-service
 
-Работа с oapi-codeger
-
+Работа с oapi-codegen
 Подробнее о oapi-codegen: https://github.com/deepmap/oapi-codegen
 
 Установить oapi-codegen:
