@@ -1,6 +1,6 @@
 # some-service
 
-Проект для освоения работы с кодогенератором oapi-codegen
+Работа с oapi-codeger
 
 Подробнее о oapi-codegen: https://github.com/deepmap/oapi-codegen
 
