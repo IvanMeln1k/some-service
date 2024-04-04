@@ -1,0 +1,114 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: SergeyAPI
+  description: About Sergey
+servers:
+  - url: http://localhost:8000
+paths:
+  /api/v1/user:
+    get:
+      description: "Получить данные о some user"
+      tags:
+        - User
+      responses:
+        "200":
+          description: "Успешно"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "500":
+          description: "Внутрення ошибка сервера"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+    post:
+      description: "Создать пользователя"
+      tags: 
+        - User
+      requestBody:
+            content:
+              application/json:
+                schema:
+                  type: object
+                  required:
+                    - email
+                    - name
+                    - username
+                  properties:
+                    email:
+                      type: string
+                      format: email
+                    name:
+                      type: string
+                    username:
+                      type: string
+      responses:
+        "200":
+          description: "Успешно"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id: 
+                    type: string
+                    format: uuid
+        "500":
+          description: "Внутренняя ошибка сервера"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+  /api/v1/photo:
+    get:
+      description: "Получить some photo"
+      tags:
+        - Photo
+      responses:
+        "200":
+          description: "Успешно"
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+        "500":
+          description: "Внутренняя ошибка сервера"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+components:
+  schemas:
+    User:
+      type: object
+      x-go-type: domain.User
+      x-go-type-import:
+        name: domain
+        path: github.com/IvanMeln1k/some-service/internal/domain
+      required:
+        - id
+        - email
+        - name
+        - username
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        username:
+          type: string
+    Message:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
